@@ -20,7 +20,7 @@ function App() {
 
         <Fade in={tab === "tracked"} unmountOnExit>
           <Box sx={{ gridArea: "1 / 1" }}>
-            <Container maxWidth="xl">Hello from {tab}!</Container>
+            <Container maxWidth="xl">Hello from tracked!</Container>
           </Box>
         </Fade>
       </main>

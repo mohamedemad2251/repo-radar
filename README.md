@@ -1,9 +1,9 @@
 # Core Requirements
 
-- [ ] Debounced GitHub repository search
+- [x] Debounced GitHub repository search
 - [ ] Track / untrack repositories
 - [ ] Tracked Repos view
-- [ ] Show stars (`stargazers_count`), open issues (`open_issues_count`), and last commit date (`pushed_at`)
+- [x] Show stars (`stargazers_count`), open issues (`open_issues_count`), and last commit date (`pushed_at`)
 - [ ] Refresh individual repos and/or all repos
 - [ ] Independent loading and error states per repo
 - [ ] Persist tracked repos using localStorage
@@ -17,7 +17,7 @@
 ### Core
 
 - [x] Debounced GitHub repository search (logic)
-- [ ] Debounced GitHub repository search (UI)
+- [x] Debounced GitHub repository search (UI)
 - [ ] Install Zustand
 - [ ] Create stores via Zustand
 - [ ] Apply Loading state per repo for avatar-loading, etc. (Not in the tracked states, but generally in RepoCard)
@@ -30,3 +30,4 @@
 - [ ] Enhance UI & theme
 - [ ] Audit responsive design
 - [ ] Add issues page per repo to show like the most recent open issues. (Just in case)
+- [ ] Make the `SearchRepos` localStorage be of one object instead of `repos-search-page`, `repos-search-query` and `repos-search-data`

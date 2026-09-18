@@ -37,7 +37,7 @@ const RepoCard = ({ repo }: RepoCardProps) => {
       >
         <CardHeader
           avatar={
-            <Link href={repo.owner.html_url}>
+            <Link href={repo.owner.html_url} underline="none">
               <Avatar src={repo.owner.avatar_url} alt={repo.owner.login} />
             </Link>
           }
