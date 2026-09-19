@@ -14,18 +14,10 @@
 
 ## Roadmap
 
-### Core
-
-- [x] Debounced GitHub repository search (logic)
-- [x] Debounced GitHub repository search (UI)
-- [x] Install Zustand
-- [x] Create stores via Zustand
-- [ ] Apply Loading state per repo for avatar-loading, etc. (Not in the tracked states, but generally in RepoCard)
-- [x] Add error state handling
-- [ ] Add 422 rate limit reached condition
-
 ### Enhancements & Optimizations
 
+- [ ] Search error handling
+- [ ] Theme Switching (Light/Dark)
 - [ ] Use an authenticated user to increase rate limit for API calling + handle 422 errors
 - [ ] Enhance UI & theme
 - [x] Audit responsive design
