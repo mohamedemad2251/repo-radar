@@ -3,7 +3,7 @@ import { type SearchRepositories } from "@/types/types";
 import { Grid, Pagination, Skeleton, Stack, TextField } from "@mui/material";
 import Container from "@mui/material/Container";
 import { useEffect, useRef, useState } from "react";
-import RepoCard from "@/components/ui/RepoCard";
+import SearchRepoCard from "@/components/ui/SearchRepoCard";
 
 // Configuration Of Debounce/Timeout Value
 const DEBOUNCE_DURATION_MS = 500;
@@ -139,7 +139,7 @@ const SearchRepos = () => {
           <Grid container spacing={2} columns={{ lg: 3, md: 2, xs: 1 }}>
             {repos.map((repo) => (
               <Grid key={repo.id} size={1} sx={{ display: "flex" }}>
-                <RepoCard repo={repo} />
+                <SearchRepoCard repo={repo} />
               </Grid>
             ))}
           </Grid>

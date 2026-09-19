@@ -1,11 +1,11 @@
 # Core Requirements
 
 - [x] Debounced GitHub repository search
-- [ ] Track / untrack repositories
-- [ ] Tracked Repos view
+- [x] Track / untrack repositories
+- [x] Tracked Repos view
 - [x] Show stars (`stargazers_count`), open issues (`open_issues_count`), and last commit date (`pushed_at`)
-- [ ] Refresh individual repos and/or all repos
-- [ ] Independent loading and error states per repo
+- [x] Refresh individual repos and/or all repos
+- [x] Independent loading and error states per repo
 - [ ] Persist tracked repos using localStorage
 - [ ] Proper TypeScript types
 - [ ] Bar chart showing stars per tracked repository
@@ -21,7 +21,7 @@
 - [x] Install Zustand
 - [x] Create stores via Zustand
 - [ ] Apply Loading state per repo for avatar-loading, etc. (Not in the tracked states, but generally in RepoCard)
-- [ ] Add error state handling
+- [x] Add error state handling
 - [ ] Add 422 rate limit reached condition
 
 ### Enhancements & Optimizations

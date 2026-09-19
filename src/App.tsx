@@ -1,6 +1,6 @@
 import Header from "@/components/layout/Header";
 import type { TabType } from "@/types/types";
-import { Box, Container, Fade } from "@mui/material";
+import { Box, Fade } from "@mui/material";
 import { useState } from "react";
 import SearchRepos from "./components/SearchRepos";
 import TrackedRepos from "./components/TrackedRepos";

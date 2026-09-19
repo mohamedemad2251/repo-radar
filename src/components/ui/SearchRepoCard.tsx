@@ -13,14 +13,13 @@ import StarIcon from "@mui/icons-material/Star";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import { useTracksStore } from "@/stores/track-store";
 
-type RepoCardProps = {
+type SearchRepoCardProps = {
   repo: Repository;
 };
 
-const RepoCard = ({ repo }: RepoCardProps) => {
-  const { addTrackedRepo, removeTrackedRepo } = useTracksStore(
-    (state) => state,
-  );
+const SearchRepoCard = ({ repo }: SearchRepoCardProps) => {
+  const addTrackedRepo = useTracksStore((state) => state.addTrackedRepo);
+  const removeTrackedRepo = useTracksStore((state) => state.removeTrackedRepo);
 
   const isTracked = useTracksStore((state) =>
     state.trackedRepos.some((trackedRepo) => trackedRepo.id === repo.id),
@@ -118,4 +117,4 @@ const RepoCard = ({ repo }: RepoCardProps) => {
   );
 };
 
-export default RepoCard;
+export default SearchRepoCard;

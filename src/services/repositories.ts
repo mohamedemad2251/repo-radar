@@ -1,5 +1,5 @@
 import { apiClient } from "@/lib/api/client";
-import { type SearchRepositories } from "@/types/types";
+import { type Repository, type SearchRepositories } from "@/types/types";
 
 export const searchRepositories = async (
   searchQueryParams: URLSearchParams,
@@ -19,6 +19,14 @@ export const searchRepositories = async (
   const data = await apiClient.get<SearchRepositories>(
     `/search/repositories?${searchQuery && searchQuery.trim().length > 0 ? searchQueryParams : fallbackSearchQueryParams}`,
   );
+
+  return data;
+};
+
+export const getRepository = async (repoFullName: string) => {
+  if (!repoFullName) return;
+
+  const data = await apiClient.get<Repository>("/repos/" + repoFullName);
 
   return data;
 };

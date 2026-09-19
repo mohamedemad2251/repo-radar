@@ -13,12 +13,12 @@ import type { TabType } from "@/types/types";
 import { useTracksStore } from "@/stores/track-store";
 
 type HeaderProps = {
-  tab: string;
+  tab: TabType;
   setTab: React.Dispatch<React.SetStateAction<TabType>>;
 };
 
 const Header = ({ tab, setTab }: HeaderProps) => {
-  const { trackedRepos } = useTracksStore();
+  const trackedRepos = useTracksStore((state) => state.trackedRepos);
   return (
     <AppBar
       position="sticky"
@@ -49,7 +49,6 @@ const Header = ({ tab, setTab }: HeaderProps) => {
                   sx={{
                     "& .MuiBadge-badge": {
                       right: -8,
-                      
                     },
                   }}
                 >
