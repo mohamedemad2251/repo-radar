@@ -18,8 +18,8 @@
 
 - [x] Debounced GitHub repository search (logic)
 - [x] Debounced GitHub repository search (UI)
-- [ ] Install Zustand
-- [ ] Create stores via Zustand
+- [x] Install Zustand
+- [x] Create stores via Zustand
 - [ ] Apply Loading state per repo for avatar-loading, etc. (Not in the tracked states, but generally in RepoCard)
 - [ ] Add error state handling
 - [ ] Add 422 rate limit reached condition

@@ -11,12 +11,21 @@ import {
 import Card from "@mui/material/Card";
 import StarIcon from "@mui/icons-material/Star";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
+import { useTracksStore } from "@/stores/track-store";
 
 type RepoCardProps = {
   repo: Repository;
 };
 
 const RepoCard = ({ repo }: RepoCardProps) => {
+  const { addTrackedRepo, removeTrackedRepo } = useTracksStore(
+    (state) => state,
+  );
+
+  const isTracked = useTracksStore((state) =>
+    state.trackedRepos.some((trackedRepo) => trackedRepo.id === repo.id),
+  );
+
   return (
     <Card
       variant="outlined"
@@ -52,7 +61,23 @@ const RepoCard = ({ repo }: RepoCardProps) => {
             </Link>
           }
         />
-        <Button sx={{ flexShrink: 0 }}>Track</Button>
+        {!isTracked ? (
+          <Button
+            variant="outlined"
+            sx={{ flexShrink: 0 }}
+            onClick={() => addTrackedRepo(repo)}
+          >
+            Track
+          </Button>
+        ) : (
+          <Button
+            variant="outlined"
+            sx={{ flexShrink: 0 }}
+            onClick={() => removeTrackedRepo(repo.id)}
+          >
+            Untrack
+          </Button>
+        )}
       </Box>
       <CardContent
         sx={{ display: "flex", flexDirection: "column", gap: 2, flex: 1 }}
@@ -72,18 +97,20 @@ const RepoCard = ({ repo }: RepoCardProps) => {
         >
           <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
             <StarIcon fontSize="inherit" color="warning"></StarIcon>
-            <Typography  variant="body2" sx={{ lineHeight: 1 }}>
+            <Typography variant="body2" sx={{ lineHeight: 1 }}>
               {repo.stargazers_count.toLocaleString()}
             </Typography>
           </Box>
           <Box sx={{ display: "inline-flex", alignItems: "center", gap: 0.5 }}>
-            <ErrorOutlineOutlinedIcon fontSize="inherit"  color="success"/>
+            <ErrorOutlineOutlinedIcon fontSize="inherit" color="success" />
             <Typography variant="body2" sx={{ lineHeight: 1 }} color="success">
               {repo.open_issues_count.toLocaleString()} open
             </Typography>
           </Box>
           <Box>
-            <Typography variant="body2">Last Committed: {new Date(repo.pushed_at).toLocaleString()}</Typography>
+            <Typography variant="body2">
+              Last Committed: {new Date(repo.pushed_at).toLocaleString()}
+            </Typography>
           </Box>
         </Box>
       </CardContent>

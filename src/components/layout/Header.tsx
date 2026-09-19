@@ -1,5 +1,7 @@
 import {
   AppBar,
+  Badge,
+  Box,
   Container,
   Tab,
   Tabs,
@@ -8,6 +10,7 @@ import {
 } from "@mui/material";
 
 import type { TabType } from "@/types/types";
+import { useTracksStore } from "@/stores/track-store";
 
 type HeaderProps = {
   tab: string;
@@ -15,6 +18,7 @@ type HeaderProps = {
 };
 
 const Header = ({ tab, setTab }: HeaderProps) => {
+  const { trackedRepos } = useTracksStore();
   return (
     <AppBar
       position="sticky"
@@ -34,8 +38,25 @@ const Header = ({ tab, setTab }: HeaderProps) => {
             Repo Radar
           </Typography>
           <Tabs value={tab} onChange={(_, value: TabType) => setTab(value)}>
-            <Tab value="repo" label="Repositories"></Tab>
-            <Tab value="tracked" label="Track"></Tab>
+            <Tab value="repo" label="Repositories" />
+            <Tab
+              value="tracked"
+              label={
+                <Badge
+                  badgeContent={trackedRepos.length}
+                  color="primary"
+                  max={99}
+                  sx={{
+                    "& .MuiBadge-badge": {
+                      right: -8,
+                      
+                    },
+                  }}
+                >
+                  <Box component="span">Tracked</Box>
+                </Badge>
+              }
+            />
           </Tabs>
         </Toolbar>
       </Container>

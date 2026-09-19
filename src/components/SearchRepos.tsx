@@ -3,7 +3,7 @@ import { type SearchRepositories } from "@/types/types";
 import { Grid, Pagination, Skeleton, Stack, TextField } from "@mui/material";
 import Container from "@mui/material/Container";
 import { useEffect, useRef, useState } from "react";
-import RepoCard from "./ui/RepoCard";
+import RepoCard from "@/components/ui/RepoCard";
 
 // Configuration Of Debounce/Timeout Value
 const DEBOUNCE_DURATION_MS = 500;
