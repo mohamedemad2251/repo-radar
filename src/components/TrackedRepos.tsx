@@ -56,13 +56,15 @@ const TrackedRepos = () => {
         )}
         {trackedRepos.length > 0 && (
           <>
-            <Typography variant="h2">Tracked Stars Chart</Typography>
+            <Typography variant="h2">Tracked Stars/Issues Chart</Typography>
 
             <BarChart
               xAxis={[
                 {
                   scaleType: "band",
                   data: trackedRepos.map((repo) => repo.full_name),
+                  // We can use this to sort the trackedRepos if we want to.
+                  // data: trackedRepos.sort((a,b)=>b.stargazers_count - a.stargazers_count).map((repo)=>repo),
                   categoryGapRatio: 0.6,
                   barGapRatio: 0.4,
                 },
