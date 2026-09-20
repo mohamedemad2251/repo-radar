@@ -1,5 +1,6 @@
-import { Stack, Typography } from "@mui/material";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
 type ErrorMessageProps = {
   error: string;
