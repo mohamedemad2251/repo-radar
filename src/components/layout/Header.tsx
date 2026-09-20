@@ -1,7 +1,6 @@
 import {
   AppBar,
   Badge,
-  Box,
   Container,
   Tab,
   Tabs,
@@ -44,15 +43,17 @@ const Header = ({ tab, setTab }: HeaderProps) => {
               label={
                 <Badge
                   badgeContent={trackedRepos.length}
-                  color="primary"
-                  max={99}
+                  invisible={trackedRepos.length === 0}
+                  color="info"
                   sx={{
                     "& .MuiBadge-badge": {
-                      right: -8,
+                      top: -14,
+                      right: -16,
+                      transform: "none",
                     },
                   }}
                 >
-                  <Box component="span">Tracked</Box>
+                  Tracked
                 </Badge>
               }
             />

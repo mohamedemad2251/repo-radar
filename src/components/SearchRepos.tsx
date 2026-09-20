@@ -1,9 +1,16 @@
 import { searchRepositories } from "@/services/repositories";
 import { type SearchRepositories } from "@/types/types";
-import { Grid, Pagination, Skeleton, Stack, TextField } from "@mui/material";
+import {
+  Grid,
+  Pagination,
+  Skeleton,
+  Stack,
+  TextField,
+} from "@mui/material";
 import Container from "@mui/material/Container";
 import { useEffect, useRef, useState } from "react";
 import SearchRepoCard from "@/components/ui/SearchRepoCard";
+import ErrorMessage from "./ui/messages/ErrorMessage";
 
 // Configuration Of Debounce/Timeout Value
 const DEBOUNCE_DURATION_MS = 500;
@@ -45,11 +52,14 @@ const SearchRepos = () => {
   // UI Loading State (for the entire component)
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // Error state
+  const [error, setError] = useState<string | null>(null);
+
   // repos => data.items
   const repos = data ? data.items : null;
 
   //   GitHub API's Limitation: Requesting data beyond 1000 renders error status 422
-  const DATA_LIMIT = 1000;
+  const SEARCH_DATA_LIMIT = 1000;
   const PER_PAGE = 12;
 
   // page => pagination and API's search parameter "page"
@@ -69,17 +79,27 @@ const SearchRepos = () => {
       searchQueryParams.append("per_page", PER_PAGE.toString());
       searchQueryParams.append("page", page.toString());
       // API call: /search/repositories
-      const data = await searchRepositories(searchQueryParams);
-      if (data) {
-        setData(data);
-        localStorage.setItem(REPOS_SEARCH_DATA, JSON.stringify(data));
-        localStorage.setItem(REPOS_SEARCH_PAGE, String(page));
+      try {
+        setError(null);
+        const data = await searchRepositories(searchQueryParams);
+        if (data) {
+          setData(data);
+          localStorage.setItem(REPOS_SEARCH_DATA, JSON.stringify(data));
+          localStorage.setItem(REPOS_SEARCH_PAGE, String(page));
+        }
+        console.log(data);
+        for (const entry of searchQueryParams.entries()) {
+          console.log(entry[0], ": ", entry[1]);
+        }
+      } catch (error) {
+        console.log(error);
+        setError(
+          error instanceof Error ? error.message : "Something went wrong",
+        );
+        setData(null);
+      } finally {
+        setIsLoading(false);
       }
-      console.log(data);
-      for (const entry of searchQueryParams.entries()) {
-        console.log(entry[0], ": ", entry[1]);
-      }
-      setIsLoading(false);
     };
 
     // If this is the initial render, no need to call the API UNLESS data was not pre-filled via localStorage
@@ -135,6 +155,9 @@ const SearchRepos = () => {
             placeholder="Search for repositories by their names here"
           />
         </Stack>
+        {error && (
+          <ErrorMessage error={error}/>
+        )}
         {!isLoading && repos && (
           <Grid container spacing={2} columns={{ lg: 3, md: 2, xs: 1 }}>
             {repos.map((repo) => (
@@ -163,8 +186,8 @@ const SearchRepos = () => {
             variant="outlined"
             sx={{ alignSelf: "center" }}
             count={
-              data.total_count > DATA_LIMIT
-                ? Math.ceil(DATA_LIMIT / PER_PAGE)
+              data.total_count > SEARCH_DATA_LIMIT
+                ? Math.ceil(SEARCH_DATA_LIMIT / PER_PAGE)
                 : Math.ceil(data?.total_count / PER_PAGE)
             }
           />

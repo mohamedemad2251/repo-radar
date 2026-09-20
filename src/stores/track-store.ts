@@ -24,7 +24,10 @@ type TrackedReposStore = {
   trackedRepos: Repository[];
   addTrackedRepo: (trackedRepo: Repository) => void;
   removeTrackedRepo: (trackedRepoId: Repository["id"]) => void;
-  refreshTrackedRepo: (trackedRepoId: Repository["id"]) => Promise<void>;
+  refreshTrackedRepo: (
+    trackedRepoId: Repository["id"],
+    bypassAPI?: boolean,
+  ) => Promise<void>;
   statusById: Partial<Record<Repository["id"], RefreshState>>;
 };
 
@@ -54,11 +57,23 @@ export const useTracksStore = create<TrackedReposStore>()(
         }),
 
       // Logic: Get the current trackedRepos via get() -> Find the correct id -> Use /repos/{owner}/{name} API -> Update that specific repo via set()
-      refreshTrackedRepo: async (trackedRepoId) => {
+      refreshTrackedRepo: async (trackedRepoId, bypassAPI = false) => {
         const trackedRepo = get().trackedRepos.find(
           (repo) => repo.id === trackedRepoId,
         );
         if (!trackedRepo) return;
+
+        // Feature: Allow bypassing the API if rate-limit was reached
+        if (bypassAPI) {
+          set((state) => {
+            const updatedStatusById = { ...state.statusById };
+            delete updatedStatusById[trackedRepoId];
+            return {
+              statusById: updatedStatusById,
+            };
+          });
+          return;
+        }
 
         // Should a repo be already refreshing, wait for it to finish first. Then you can refresh again
         if (get().statusById[trackedRepoId]?.status === "loading") {

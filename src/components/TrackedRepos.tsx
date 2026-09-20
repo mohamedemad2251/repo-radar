@@ -63,6 +63,8 @@ const TrackedRepos = () => {
                 {
                   scaleType: "band",
                   data: trackedRepos.map((repo) => repo.full_name),
+                  categoryGapRatio: 0.6,
+                  barGapRatio: 0.4,
                 },
               ]}
               series={[
@@ -70,15 +72,30 @@ const TrackedRepos = () => {
                   label: "Stars",
                   data: trackedRepos.map((repo) => repo.stargazers_count),
                   color: "orange",
+                  yAxisId: "stars",
                 },
                 {
                   label: "Open Issues",
                   data: trackedRepos.map((repo) => repo.open_issues_count),
                   color: "limegreen",
+                  yAxisId: "issues",
                 },
               ]}
               yAxis={[
                 {
+                  id: "stars",
+                  label: "Stars",
+                  position: "left",
+                  width: "auto",
+                  valueFormatter: (value: number) =>
+                    Intl.NumberFormat("en", {
+                      notation: "compact",
+                    }).format(value),
+                },
+                {
+                  id: "issues",
+                  label: "Open Issues",
+                  position: "right",
                   width: "auto",
                   valueFormatter: (value: number) =>
                     Intl.NumberFormat("en", {
