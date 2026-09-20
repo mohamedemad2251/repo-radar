@@ -1,24 +1,28 @@
 import { useTracksStore } from "@/stores/track-store";
-import {
-  Box,
-  Button,
-  Container,
-  Fade,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
+
 import TrackedRepoCard from "./ui/TrackedRepoCard";
 import { BarChart } from "@mui/x-charts/BarChart";
+import Container from "@mui/material/Container";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Fade from "@mui/material/Fade";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
 
 const TrackedRepos = () => {
   const trackedRepos = useTracksStore((state) => state.trackedRepos);
+  const removeTrackedRepo = useTracksStore((state) => state.removeTrackedRepo)
   const refreshTrackedRepo = useTracksStore(
     (state) => state.refreshTrackedRepo,
   );
 
   const refreshAll = () => {
     trackedRepos.forEach((trackedRepo) => refreshTrackedRepo(trackedRepo.id));
+  };
+
+  const untrackAll = () => {
+    trackedRepos.forEach((trackedRepo) => removeTrackedRepo(trackedRepo.id));
   };
 
   return (
@@ -28,15 +32,23 @@ const TrackedRepos = () => {
           <Box
             sx={{
               display: "flex",
+              flexDirection: {sm: "row", xs: "column"},
+              gap: 2,
               justifyContent: "space-between",
               alignItems: "center",
             }}
           >
             <Typography variant="h2">Tracked Repositories</Typography>
             <Fade in={trackedRepos.length > 0}>
+              <Stack spacing={2} direction={"row"}>
+
               <Button variant="outlined" onClick={refreshAll}>
                 Refresh All
               </Button>
+              <Button variant="outlined" onClick={untrackAll}>
+                Untrack All
+              </Button>
+              </Stack>
             </Fade>
           </Box>
           <Grid container spacing={2} columns={{ lg: 3, md: 2, xs: 1 }}>
@@ -56,7 +68,7 @@ const TrackedRepos = () => {
         )}
         {trackedRepos.length > 0 && (
           <>
-            <Typography variant="h2">Tracked Stars/Issues Chart</Typography>
+            <Typography variant="h2" sx={{textAlign: {xs: "center", sm: "start"}}}>Tracked Stars/Issues Chart</Typography>
 
             <BarChart
               xAxis={[

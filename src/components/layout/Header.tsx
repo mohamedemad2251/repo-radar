@@ -1,15 +1,14 @@
-import {
-  AppBar,
-  Badge,
-  Container,
-  Tab,
-  Tabs,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-
 import type { TabType } from "@/types/types";
 import { useTracksStore } from "@/stores/track-store";
+import AppBar from "@mui/material/AppBar";
+import Container from "@mui/material/Container";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Badge from "@mui/material/Badge";
+import ToggleTheme from "../ui/ToggleTheme";
 
 type HeaderProps = {
   tab: TabType;
@@ -36,28 +35,34 @@ const Header = ({ tab, setTab }: HeaderProps) => {
           <Typography component="h1" variant="h2" sx={{ flexGrow: 1 }}>
             Repo Radar
           </Typography>
-          <Tabs value={tab} onChange={(_, value: TabType) => setTab(value)}>
-            <Tab value="repo" label="Repositories" />
-            <Tab
-              value="tracked"
-              label={
-                <Badge
-                  badgeContent={trackedRepos.length}
-                  invisible={trackedRepos.length === 0}
-                  color="info"
-                  sx={{
-                    "& .MuiBadge-badge": {
-                      top: -14,
-                      right: -16,
-                      transform: "none",
-                    },
-                  }}
-                >
-                  Tracked
-                </Badge>
-              }
-            />
-          </Tabs>
+          <Stack spacing={{
+            md: 6,
+            sm: 2,
+          }} direction={"row"} sx={{ alignItems: "center"}}>
+            <ToggleTheme />
+            <Tabs value={tab} onChange={(_, value: TabType) => setTab(value)}>
+              <Tab value="repo" label="Repositories" />
+              <Tab
+                value="tracked"
+                label={
+                  <Badge
+                    badgeContent={trackedRepos.length}
+                    invisible={trackedRepos.length === 0}
+                    color="info"
+                    sx={{
+                      "& .MuiBadge-badge": {
+                        top: -14,
+                        right: -16,
+                        transform: "none",
+                      },
+                    }}
+                  >
+                    Tracked
+                  </Badge>
+                }
+              />
+            </Tabs>
+          </Stack>
         </Toolbar>
       </Container>
     </AppBar>

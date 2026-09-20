@@ -54,7 +54,7 @@ const TrackedRepoCard = ({ repo }: TrackedRepoCardProps) => {
               variant="outlined"
               onClick={() => refreshTrackedRepo(repo.id, true)}
             >
-              Show Last Update
+              Show Last Snapshot
             </Button>
 
             <Button

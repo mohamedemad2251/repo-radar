@@ -1,16 +1,16 @@
 import { searchRepositories } from "@/services/repositories";
 import { type SearchRepositories } from "@/types/types";
-import {
-  Grid,
-  Pagination,
-  Skeleton,
-  Stack,
-  TextField,
-} from "@mui/material";
+
 import Container from "@mui/material/Container";
 import { useEffect, useRef, useState } from "react";
 import SearchRepoCard from "@/components/ui/SearchRepoCard";
 import ErrorMessage from "./ui/messages/ErrorMessage";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import Skeleton from "@mui/material/Skeleton";
+import Pagination from "@mui/material/Pagination";
+import Button from "@mui/material/Button";
 
 // Configuration Of Debounce/Timeout Value
 const DEBOUNCE_DURATION_MS = 500;
@@ -145,6 +145,8 @@ const SearchRepos = () => {
       <Stack spacing={2}>
         <Stack spacing={1}>
           <label htmlFor="search-query">Search Repositories</label>
+          <Stack spacing={2} direction={"row"}>
+
           <TextField
             id="search-query"
             name="search-query"
@@ -152,12 +154,13 @@ const SearchRepos = () => {
             onChange={(e) => {
               setInputValue(e.target.value);
             }}
+            sx={{flex: 1}}
             placeholder="Search for repositories by their names here"
           />
+          <Button variant="outlined" onClick={()=>setInputValue("")}>Clear</Button>
+          </Stack>
         </Stack>
-        {error && (
-          <ErrorMessage error={error}/>
-        )}
+        {error && <ErrorMessage error={error} />}
         {!isLoading && repos && (
           <Grid container spacing={2} columns={{ lg: 3, md: 2, xs: 1 }}>
             {repos.map((repo) => (

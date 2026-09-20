@@ -3,21 +3,23 @@ import { createTheme } from "@mui/material/styles";
 // Material UI lets you customize the theme via <ThemeProvider>{children}</ThemeProvider>. For the provider, you need to specify a theme in its props. This theme is defined here in @/theme/theme.ts
 // Reference: https://mui.com/material-ui/customization/theming/?_gl=1*1em5dwr*_up*MQ..*_ga*MTE3MTg1MTk2Mi4xNzg5NTkzOTk4*_ga_5NXDQLC2ZK*czE3ODk1OTM5OTckbzEkZzAkdDE3ODk1OTQwMTgkajM5JGwwJGgw
 export const theme = createTheme({
-  cssVariables: true,
+  cssVariables: {
+    colorSchemeSelector: "class",
+  },
   defaultColorScheme: "dark",
   // Since we'll be defining both light & dark themes, a simple "palette" won't do (too general). Therefore, we defined colorSchemes
   colorSchemes: {
     light: {
       palette: {
         primary: {
-          main: "#2563eb",
+          main: "#0d275e",
           light: "#60a5fa",
           dark: "#1d4ed8",
           contrastText: "#ffffff",
         },
 
         secondary: {
-          main: "#7c3aed",
+          main: "#b2a8c4",
         },
 
         background: {
@@ -27,11 +29,11 @@ export const theme = createTheme({
 
         text: {
           primary: "#0f172a",
-          secondary: "#64748b",
+          secondary: "#445975",
         },
 
         error: {
-          main: "#dc2626",
+          main: "#ce4646",
         },
       },
     },

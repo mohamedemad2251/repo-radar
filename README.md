@@ -29,13 +29,13 @@
 - [ ] Fix localStorage bugs when a user manually removes core items like page number
 - [x] Search error handling
 - [ ] Check if you can add an authenticated user to increase rate limit
-- [ ] Theme Switching (Light/Dark)
+- [x] Theme Switching (Light/Dark)
 - [ ] Use an authenticated user to increase rate limit for API calling + handle 422 errors
 - [x] Check if you can have 2 y-axis scales for the BarChart component
 - [ ] Add selector for PER_PAGE In `SearchRepos`
-- [ ] Clear search bar via "Clear" button
-- [ ] Clear all button to clear all tracked repos
-- [ ] Enhance UI & theme
+- [x] Clear search bar via "Clear" button
+- [x] Clear all button to clear all tracked repos
+- [x] Enhance UI & theme
 - [x] Audit responsive design
 - [ ] Add issues page per repo to show like the most recent open issues. (Just in case)
 - [ ] Make the `SearchRepos` localStorage be of one object instead of `repos-search-page`, `repos-search-query` and `repos-search-data`

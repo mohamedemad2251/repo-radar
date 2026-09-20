@@ -33,3 +33,7 @@ So, each `key` would correspond to an ID and any missing ID's would be considere
 
 ---
 
+#### 3. `import {#Bundle_Name} from "@mui/material"` vs `import {#Bundle_Name} from "@mui/material/#Bundle_Name"`
+
+- Verdict: Use `import {#Bundle_Name} from "@mui/material/#Bundle_Name"`
+- Reason: To avoid **Barrel Imports** which can slow down performance. [See Material UI's documentation for bundle size.](https://mui.com/material-ui/guides/minimizing-bundle-size/)

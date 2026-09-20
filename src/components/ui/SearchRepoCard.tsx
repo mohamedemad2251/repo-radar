@@ -1,9 +1,13 @@
 import type { Repository } from "@/types/types";
-import { Avatar, Box, Button, CardHeader, Link } from "@mui/material";
 import Card from "@mui/material/Card";
 
 import { useTracksStore } from "@/stores/track-store";
 import RepoCardContent from "./RepoCardContent";
+import Box from "@mui/material/Box";
+import CardHeader from "@mui/material/CardHeader";
+import Link from "@mui/material/Link";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
 
 type SearchRepoCardProps = {
   repo: Repository;

@@ -1,9 +1,10 @@
 import Header from "@/components/layout/Header";
 import type { TabType } from "@/types/types";
-import { Box, Fade } from "@mui/material";
 import { useState } from "react";
-import SearchRepos from "./components/SearchRepos";
-import TrackedRepos from "./components/TrackedRepos";
+import SearchRepos from "@/components/SearchRepos";
+import TrackedRepos from "@/components/TrackedRepos";
+import Fade from "@mui/material/Fade";
+import Box from "@mui/material/Box";
 
 function App() {
   const [tab, setTab] = useState<TabType>("repo");
@@ -21,7 +22,7 @@ function App() {
 
         <Fade in={tab === "tracked"} unmountOnExit>
           <Box sx={{ gridArea: "1 / 1" }}>
-            <TrackedRepos/>
+            <TrackedRepos />
           </Box>
         </Fade>
       </main>
